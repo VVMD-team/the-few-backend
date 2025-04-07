@@ -46,6 +46,11 @@ export default async function getProjectFiles(
 
     const projectPassword = project.fieldData.password;
 
+    if (projectPassword && !password){
+      res.status(200).json({ files: null });
+      return
+    }
+
     if (projectPassword && projectPassword !== password) {
       res.status(403).json({ message: 'Invalid password' });
       return;
